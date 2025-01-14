@@ -1,0 +1,13 @@
+const key = process.env.REACT_APP_API_KEY;
+
+export const getMovieList = async (searchMovie) => {
+    try {
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${searchMovie}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        }
+    } catch (error) {
+        console.error('Fetch 에러', error);
+    }
+};
