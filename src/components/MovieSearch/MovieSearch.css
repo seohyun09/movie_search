@@ -1,0 +1,26 @@
+.search-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-input {
+    width: 500px;
+    height: 40px;
+    border-radius: 15px;
+    border: solid gainsboro 1px;
+    padding-left: 15px;
+}
+
+.search-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: solid gainsboro 1px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.search-button-image {
+    width: 20px;
+}
