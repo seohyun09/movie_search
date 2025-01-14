@@ -11,3 +11,15 @@ export const getMovieList = async (searchMovie) => {
         console.error('Fetch 에러', error);
     }
 };
+
+export const getMovieDetail = async (movieID) => {
+    try {
+        const response = await fetch(`http://www.omdbapi.com/?apikey=${key}&i=${movieID}`);
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        }
+    } catch (error) {
+        console.error('Fetch 에러', error);
+    }
+};
