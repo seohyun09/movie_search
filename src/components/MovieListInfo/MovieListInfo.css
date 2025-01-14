@@ -1,0 +1,17 @@
+.movielist-container {
+    width: 200px;
+    border-radius: 10px;
+    border: solid gainsboro 1px;
+    margin: 10px;
+}
+
+.movielist-image {
+    width: 200px;
+    height: 80%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.movielist-title {
+    justify-content: center;
+}
