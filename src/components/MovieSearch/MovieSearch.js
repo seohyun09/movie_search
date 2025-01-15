@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './MovieSearch.css';
 
 import searchIcon from '../../assets/searchIcon.png';
 
 function MovieSearch({ setSearchMovie }) {
     const [movieTitle, setMovieTitle] = useState('');
+    const navigate = useNavigate();
 
     const handleMovieTitle = (e) => {
         setMovieTitle(e.target.value);
@@ -12,6 +14,7 @@ function MovieSearch({ setSearchMovie }) {
 
     const handleSearch = () => {
         setSearchMovie(movieTitle);
+        navigate('');
     };
 
     return (
