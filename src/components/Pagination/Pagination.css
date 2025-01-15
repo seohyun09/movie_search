@@ -1,0 +1,42 @@
+.pagination-container {
+    display: flex;
+
+    justify-content: center;
+    flex-direction: row;
+}
+
+.pagination-button {
+    width: 20px;
+    padding: 8px;
+    border-radius: 5px;
+    justify-content: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.pagination-button:hover {
+    background-color: #ddd;
+}
+
+.pagination-li:hover {
+    background-color: #ddd;
+}
+
+.pagination-li {
+    width: 20px;
+    padding: 8px;
+    border-radius: 5px;
+    justify-content: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.pagination-li-active {
+    width: 20px;
+    padding: 8px;
+    border-radius: 5px;
+    justify-content: center;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #ddd;
+}
