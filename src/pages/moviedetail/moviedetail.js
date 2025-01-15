@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './moviedetail.css';
 
-import MovieSearch from '../../components/MovieSearch/MovieSearch';
-
 import { getMovieDetail } from '../../apis/MovieInfo';
 
 function MovieDetail() {
@@ -26,7 +24,6 @@ function MovieDetail() {
 
     return (
         <div className='moviedetail-box'>
-            <MovieSearch />
             {isLoading && (
                 <div className='loading'>
                     <p>Loading . . .</p>
