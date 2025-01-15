@@ -23,12 +23,17 @@ function Main({ searchMovie, setSearchMovie }) {
 
     return (
         <div>
-            <div className='movielist-box'>
-                {searchMovie &&
-                    movieList.map((movie) => <MovieListInfo movie={movie} setSearchMovie={setSearchMovie} />)}
-            </div>
             {searchMovie && (
-                <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <>
+                    <div className='movielist-box'>
+                        {movieList.map((movie) => (
+                            <MovieListInfo movie={movie} setSearchMovie={setSearchMovie} />
+                        ))}
+                    </div>
+                    {movieList.length > 0 && (
+                        <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    )}
+                </>
             )}
         </div>
     );
