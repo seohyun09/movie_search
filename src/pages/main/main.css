@@ -1,3 +1,21 @@
 .movielist-box {
     display: flex;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: auto;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-box {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
 }

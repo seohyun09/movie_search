@@ -31,7 +31,13 @@ function Main({ searchMovie, setSearchMovie }) {
                         ))}
                     </div>
                     {movieList.length > 0 && (
-                        <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                        <div className='pagination-box'>
+                            <Pagination
+                                totalPage={totalPage}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
+                        </div>
                     )}
                 </>
             )}
