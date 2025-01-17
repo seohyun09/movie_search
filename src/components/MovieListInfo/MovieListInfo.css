@@ -17,8 +17,13 @@
 }
 
 .movielist-title {
-    justify-content: center;
-    flex-wrap: wrap;
+    width: 200px;
+    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .movielist-hover {
