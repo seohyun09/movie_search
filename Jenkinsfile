@@ -32,6 +32,20 @@ pipeline {
             }
         }
 
+        stage('Login to AWS ECR') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: "${AWS_CREDENTIAL_ID}"
+                ]]) {
+                    sh '''
+                        aws ecr get-login-password --region ${REGION} | \
+                        docker login --username AWS --password-stdin ${ECR_REGISTRY}
+                    '''
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh """
@@ -43,14 +57,10 @@ pipeline {
 
         stage('Push to ECR') {
             steps {
-                script {
-                    sh 'rm -f ~/.dockercfg ~/.docker/config.json || true'
-
-                    docker.withRegistry("https://${ECR_REGISTRY}", "ecr:${REGION}:${AWS_CREDENTIAL_ID}") {
-                        docker.image("${IMAGE_NAME}:${BUILD_NUMBER}").push()
-                        docker.image("${IMAGE_NAME}:latest").push()
-                    }
-                }
+                sh """
+                    docker push ${IMAGE_NAME}:${BUILD_NUMBER}
+                    docker push ${IMAGE_NAME}:latest
+                """
             }
         }
 
