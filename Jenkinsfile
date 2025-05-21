@@ -9,8 +9,9 @@ pipeline {
         // AWS ECR
         REGION = 'ap-southeast-2'
         ECR_REGISTRY = '950846564115.dkr.ecr.ap-southeast-2.amazonaws.com'
-        IMAGE_NAME = "${ECR_REGISTRY}/devops_ecr"
-        AWS_CREDENTIAL_ID = 'devops_ecr_plugin' // Jenkins에 등록된 AWS 자격증명 ID
+        REPOSITORY_NAME = 'devops_ecr'
+        IMAGE_NAME = "${ECR_REGISTRY}/${REPOSITORY_NAME}"
+        AWS_CREDENTIAL_ID = 'devops_ecr_plugin' // Jenkins에 등록된 AWS credentials ID
     }
 
     stages {
@@ -39,6 +40,7 @@ pipeline {
                     credentialsId: "${AWS_CREDENTIAL_ID}"
                 ]]) {
                     sh '''
+                        echo "🔐 Logging in to AWS ECR..."
                         aws ecr get-login-password --region ${REGION} | \
                         docker login --username AWS --password-stdin ${ECR_REGISTRY}
                     '''
@@ -48,35 +50,40 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh """
+                sh '''
+                    echo "🐳 Building Docker image..."
                     docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .
                     docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest
-                """
+                '''
             }
         }
 
         stage('Push to ECR') {
             steps {
-                sh """
+                sh '''
+                    echo "📤 Pushing Docker image to ECR..."
                     docker push ${IMAGE_NAME}:${BUILD_NUMBER}
                     docker push ${IMAGE_NAME}:latest
-                """
+                '''
             }
         }
 
         stage('Clean up Docker Images') {
             steps {
-                sh "docker image prune -f --all --filter \"until=1h\""
+                sh '''
+                    echo "🧹 Cleaning up local Docker images..."
+                    docker image prune -f --all --filter "until=1h"
+                '''
             }
         }
     }
 
     post {
         success {
-            echo "✅ SUCCESS: Pushed to ECR"
+            echo "✅ SUCCESS: Docker image pushed to private ECR!"
         }
         failure {
-            echo "❌ FAILED: Check logs"
+            echo "❌ FAILED: See Jenkins console logs for details."
         }
     }
 }
