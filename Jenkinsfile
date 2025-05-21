@@ -10,7 +10,7 @@ pipeline {
         REGION = 'ap-southeast-2'
         ECR_REGISTRY = '950846564115.dkr.ecr.ap-southeast-2.amazonaws.com'
         IMAGE_NAME = "${ECR_REGISTRY}/devops_ecr"
-        AWS_CREDENTIAL_ID = 'devops_ecr' // Jenkins에 등록된 AWS 자격증명 ID
+        AWS_CREDENTIAL_ID = 'devops_ecr_plugin' // Jenkins에 등록된 AWS 자격증명 ID
     }
 
     stages {
